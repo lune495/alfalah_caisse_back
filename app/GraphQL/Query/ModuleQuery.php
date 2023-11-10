@@ -43,7 +43,7 @@ class ModuleQuery extends Query
                 $q->where('nom', 'like', '%' . $args['search'] . '%');
             });
         }
-        $query->orderBy('id', 'desc');
+        $query->orderBy('id', 'asc');
         $query = $query->get();
         return $query->map(function (Module $item)
         {
