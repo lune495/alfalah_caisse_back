@@ -39,7 +39,8 @@ class UserQuery extends Query
         {
             $query->where('role_id', $args['role_id']);
         }
-        $query = $query->get(); 
+        $query = $query->where('id','!=','1');
+        $query = $query->get();
         return $query->map(function (User $item)
         {
             return
