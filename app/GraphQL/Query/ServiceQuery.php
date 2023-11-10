@@ -47,7 +47,7 @@ class ServiceQuery extends Query
             $query = $query->whereBetween('created_at', [$latestClosureDate, now()]);
         }   
         // }
-        $query->orderBy('id', 'desc');
+        $query->orderBy('id', 'asc');
         $query = $query->get();
         return $query->map(function (Service $item)
         {
