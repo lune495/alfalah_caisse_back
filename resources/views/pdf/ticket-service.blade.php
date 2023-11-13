@@ -76,7 +76,7 @@
                 <br>
 
                 <div style="font-size: 10px;font-weight:bold">
-                    <img src="{{asset('app-assets/assets/images/LOGO.PNG')}}" style="width: 80px; margin-top: 10px;"> <br>
+                    <img src="{{asset('app-assets/assets/images/LOGO2.PNG')}}" style="width: 80px; margin-top: 10px;"> <br>
                     <!--IMAARA-->
                 </div>
 
