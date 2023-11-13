@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image as Image;
-use App\Models\{Service,Outil,User,Produit,ElementService,Log,TypeService,ClotureCaisse,Depense,Vente};
+use App\Models\{Service,Outil,User,Produit,ElementService,Log,HistoriqueCaisse,TypeService,ClotureCaisse,Depense,Vente};
 use \PDF;
 use App\Events\MyEvent;
 
@@ -147,11 +147,18 @@ class CaisseController extends Controller
             {
                 throw new \Exception('{"data": null, "errors": "'. $errors .'" }');
             }
+            $latestClosure = ClotureCaisse::latest('date_fermeture')->first();
             $caisseCloture = new ClotureCaisse();
             $caisseCloture->date_fermeture = now(); // Ou utilisez la date/heure appropriée
             $caisseCloture->montant_total = $montant;
             $caisseCloture->user_id = $user->id;
             $caisseCloture->save();
+
+            $historiqueCaisse = new HistoriqueCaisse();
+            $historiqueCaisse->date_ouverture = $latestClosure->date_fermeture;
+            $historiqueCaisse->date_fermeture = now();
+            $historiqueCaisse->user_id = $user->id;
+            $historiqueCaisse->save();
 
             return response()->json(['message' => 'Caisse fermée avec succès.']);
         } catch (\Throwable $e) {

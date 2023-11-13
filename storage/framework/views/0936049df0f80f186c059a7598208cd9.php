@@ -71,37 +71,37 @@
         <div>
             <section class="droite" style="text-align: center;font-size: 20px;">
                 <header style="margin-top : 50px">
-                     TICKET {{$module ? $module["nom"] : ""}}
+                     TICKET <?php echo e($module ? $module["nom"] : ""); ?>
+
                 </header>
                 <br>
 
                 <div style="font-size: 10px;font-weight:bold">
-                    <img src="{{asset('app-assets/assets/images/LOGO.PNG')}}" style="width: 80px; margin-top: 10px;"> <br>
+                    <img src="<?php echo e(asset('app-assets/assets/images/LOGO.PNG')); ?>" style="width: 80px; margin-top: 10px;"> <br>
                     <!--IMAARA-->
                 </div>
 
                 <div style="margin:10px 0">
-                            Ministere de la santé
-                            Mouvement ALFALAH
-                            Rue 14 Niangor colobane
+                            Centre Medico Social
+                    CHIFAA No 023 Parcelles Assainies-Unité 24
                 </div>
                 <div style="margin:10px 0">
-                    TEL : +221 33 823 04 43 / 30 104 22 71
+                    TEL : 33 821 25 12 / 77 270 72 22
                 </div>
                 ************************
-                {{-- <div style="margin:7px 0">
-                Adresse : {{ isset($adresse) ? $adresse : "NEANT"}}
-                </div> --}}
-                <dt  style="margin:10px 0">Date : {{$created_at}}</dt>
+                
+                <dt  style="margin:10px 0">Date : <?php echo e($created_at); ?></dt>
                 <div style="margin:7px 0">
-                Medecin : Dr {{ isset($medecin) ? $medecin["nom"] : "NEANT"}}
+                Medecin : Dr <?php echo e(isset($medecin) ? $medecin["nom"] : "NEANT"); ?>
+
                 </div>
                 <div style="margin:7px 0">
-                    Patient(e) : {{ isset($nom_complet) ? \App\Models\Outil::toUpperCase($nom_complet) : "No ref"}}
+                    Patient(e) : <?php echo e(isset($nom_complet) ? \App\Models\Outil::toUpperCase($nom_complet) : "No ref"); ?>
+
                 </div>
                 ************************
 
-                <dt  style="font-size: 18px;font-weight:bold">Vente N°{{$id}}</dt>
+                <dt  style="font-size: 18px;font-weight:bold">Vente N°<?php echo e($id); ?></dt>
             </section>
             <section  style="margin-top : 30px;font-size: 15px;">
                 <table>
@@ -111,15 +111,17 @@
                         <td style="width: 60%">Produit </td>
                         <td style="width: 20%">Montant </td>
                     </tr> -->
-                        {{$montant = 0}}
-                        @foreach($element_services as $element_service )
+                        <?php echo e($montant = 0); ?>
+
+                        <?php $__currentLoopData = $element_services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $element_service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
-                                <td style="padding-left: 15px;">{{$element_service["type_service"]["nom"] ? $element_service["type_service"]["nom"] : "" }}</td>
-                                <td style="padding-left: 15px;">{{$element_service["type_service"]["prix"] ? \App\Models\Outil::formatPrixToMonetaire($element_service["type_service"]["prix"], false, false) : ""}}</td>
-                                {{$element_service["type_service"]["prix"] ? $montant = $montant + $element_service["type_service"]["prix"] : ""}}
+                                <td style="padding-left: 15px;"><?php echo e($element_service["type_service"]["nom"] ? $element_service["type_service"]["nom"] : ""); ?></td>
+                                <td style="padding-left: 15px;"><?php echo e($element_service["type_service"]["prix"] ? \App\Models\Outil::formatPrixToMonetaire($element_service["type_service"]["prix"], false, false) : ""); ?></td>
+                                <?php echo e($element_service["type_service"]["prix"] ? $montant = $montant + $element_service["type_service"]["prix"] : ""); ?>
+
                                 <td style="padding-left: 15px">
                             </tr>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
                 </table>
             </section>
@@ -129,7 +131,7 @@
                     <tbody>
                     <tr>
                         <td style="text-align:left">Total </td>
-                        <td style="padding : 10px 0;text-align:left">  {{\App\Models\Outil::formatPrixToMonetaire($montant, false, true)}}</td>
+                        <td style="padding : 10px 0;text-align:left">  <?php echo e(\App\Models\Outil::formatPrixToMonetaire($montant, false, true)); ?></td>
                     </tr>
                     </tbody>
                 </table>
@@ -138,7 +140,7 @@
     </body>
   <footer>
         
-        <!-- <p style="font-size:10px">Vous avez été servi par:  {{$user ? $user["name"] : " "}} </p> -->
+        <!-- <p style="font-size:10px">Vous avez été servi par:  <?php echo e($user ? $user["name"] : " "); ?> </p> -->
         <p style="font-size:10px">Votre Santé Notre Priorité </p>
 </footer>
-</html>
+</html><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/alfalah_caisse_back/resources/views/pdf/ticket-service.blade.php ENDPATH**/ ?>
