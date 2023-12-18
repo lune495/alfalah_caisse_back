@@ -273,7 +273,7 @@ class CaisseController extends Controller
                     //     });
                     // })
                     // ->where('created_at', '<=', now())
-                    ->whereBetween('created_at', "2023-12-15 09:02:34", "2023-12-18 08:40:34")
+                    ->whereBetween('created_at', ["2023-12-15 09:02:34", "2023-12-18 08:40:34"])
                     // ->where('statut_pharma','=',false)
                     ->groupBy('designation')
                     ->orderBy('designation')
