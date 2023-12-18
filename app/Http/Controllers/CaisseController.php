@@ -284,7 +284,7 @@ class CaisseController extends Controller
                     // ->whereNotNull('date_fermeture')
                     // ->first();
                     ->orderBy('id', 'asc')
-                    ->whereBetween('date_fermeture', "2023-12-15 09:02:34", "2023-12-18 08:40:34")
+                    ->whereBetween('date_fermeture', ["2023-12-15 09:02:34", "2023-12-18 08:40:34"])
                     ->get();
                     //dd($latestClosureDate);
                     // Depense
