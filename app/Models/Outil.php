@@ -138,6 +138,7 @@ class Outil extends Model
             ]
         ]);
         $name_env = self::getAPI();
+        dd($name_env);
         $critere = (is_numeric($id_critere)) ? "id:{$id_critere}" : $id_critere;
         $queryAttr = Outil::$queries[$queryName];
         // dd($queryAttr);

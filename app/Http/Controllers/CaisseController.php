@@ -179,7 +179,7 @@ class CaisseController extends Controller
         if($service!=null)
         {
          $data = Outil::getOneItemWithGraphQl($this->queryName, $id, true);
-        dd($data);
+        // dd($data);
          $pdf = PDF::loadView("pdf.ticket-service", $data);
         $measure = array(0,0,225.772,650.197);
         return $pdf->setPaper($measure, 'orientation')->stream();
