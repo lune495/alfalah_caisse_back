@@ -294,7 +294,7 @@ class CaisseController extends Controller
                     ->get();
                     $results['data'] = $data;
                     $results['depenses'] = $depenses;
-                    $results['derniere_date_fermeture'] = $latestClosureDate->latest_date_fermeture;
+                    $results['derniere_date_fermeture'] = "2023-12-15 09:02:34";
                     $results['current_date'] = now()->format('Y-m-d H:i:s');
                     //dd($results);
             }
