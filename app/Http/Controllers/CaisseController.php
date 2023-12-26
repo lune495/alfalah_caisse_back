@@ -264,34 +264,20 @@ class CaisseController extends Controller
             } else {
                 $data = DB::table('logs')
                     ->select('designation', DB::raw('SUM(prix) AS total_prix'))
-                    ->where(function ($query) {
-                        $query->where('created_at', '>=', function ($subQuery) {
-                            $subQuery->select('date_fermeture')
-                                ->from('cloture_caisses')
-                                ->orderByDesc('date_fermeture')
-                                ->limit(1);
-                        });
-                    })
-                    ->where('created_at', '<=', now())
+                    ->whereBetween('created_at', ["2023-12-22 08:52:21", "2023-12-25 10:35:40"])
                     // ->where('statut_pharma','=',false)
                     ->groupBy('designation')
                     ->orderBy('designation')
                     ->get();
-
-                    $latestClosureDate = DB::table('cloture_caisses')
-                    ->select(DB::raw('MAX(date_fermeture) AS latest_date_fermeture'))
-                    ->whereNotNull('date_fermeture')
-                    ->first();
-                    //dd($latestClosureDate);
                     // Depense
                     $depenses = DB::table('depenses')
                     ->orderBy('id', 'asc')
-                    ->whereBetween('created_at', [$latestClosureDate ? $latestClosureDate->latest_date_fermeture : "0000-00-00 00:00:00", now()])
+                    ->whereBetween('created_at', ["2023-12-22 08:52:21", "2023-12-25 10:35:40"])
                     ->get();
                     $results['data'] = $data;
                     $results['depenses'] = $depenses;
-                    $results['derniere_date_fermeture'] = $latestClosureDate->latest_date_fermeture;
-                    $results['current_date'] = now()->format('Y-m-d H:i:s');
+                    $results['derniere_date_fermeture'] = "2023-12-22 08:52:21";
+                    $results['current_date'] = "2023-12-25 10:35:40";
                     //dd($results);
             }
         $pdf = PDF::loadView("pdf.situation-pdf",$results);
