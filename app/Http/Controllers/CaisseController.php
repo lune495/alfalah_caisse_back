@@ -264,7 +264,7 @@ class CaisseController extends Controller
             } else {
                 $data = DB::table('logs')
                     ->select('designation', DB::raw('SUM(prix) AS total_prix'))
-                    ->whereBetween('created_at', ["2023-12-22 08:52:21", "2023-12-25 10:35:40"])
+                    ->whereBetween('created_at', ["2023-12-25 10:35:40", "2023-12-26 07:18:30"])
                     // ->where('statut_pharma','=',false)
                     ->groupBy('designation')
                     ->orderBy('designation')
@@ -272,12 +272,12 @@ class CaisseController extends Controller
                     // Depense
                     $depenses = DB::table('depenses')
                     ->orderBy('id', 'asc')
-                    ->whereBetween('created_at', ["2023-12-22 08:52:21", "2023-12-25 10:35:40"])
+                    ->whereBetween('created_at', ["2023-12-25 10:35:40", "2023-12-26 07:18:30"])
                     ->get();
                     $results['data'] = $data;
                     $results['depenses'] = $depenses;
-                    $results['derniere_date_fermeture'] = "2023-12-22 08:52:21";
-                    $results['current_date'] = "2023-12-25 10:35:40";
+                    $results['derniere_date_fermeture'] = "2023-12-25 10:35:40";
+                    $results['current_date'] = "2023-12-26 07:18:30";
                     //dd($results);
             }
         $pdf = PDF::loadView("pdf.situation-pdf",$results);
