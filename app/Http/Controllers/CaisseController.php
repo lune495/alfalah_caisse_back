@@ -330,8 +330,8 @@ class CaisseController extends Controller
                     ->get();
                     $results['data'] = $data;
                     $results['depenses'] = $depenses;
-                    $results['derniere_date_fermeture'] = "2024-04-15 21:24:48";
-                    $results['current_date'] = "2024-04-15 08:23:32";
+                    $results['derniere_date_fermeture'] = "2024-04-15 08:23:32";
+                    $results['current_date'] = "2024-04-15 21:24:48";
                     //dd($results);
             }
         $pdf = PDF::loadView("pdf.situation-pdf",$results);
