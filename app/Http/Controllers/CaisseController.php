@@ -309,7 +309,7 @@ class CaisseController extends Controller
                     //     });
                     // })
                     // ->where('created_at', '<=', now())
-                    ->whereBetween('created_at', ["2024-04-15 21:24:48", "2024-04-16 08:32:36"])
+                    ->whereBetween('created_at', ["2024-04-15 08:23:32", "2024-04-15 21:24:48"])
                     // ->where('statut_pharma','=',false)
                     ->groupBy('designation')
                     ->orderBy('designation')
@@ -320,20 +320,19 @@ class CaisseController extends Controller
                     // ->whereNotNull('date_fermeture')
                     // ->first();
                     ->orderBy('id', 'asc')
-                    ->whereBetween('date_fermeture', ["2024-04-15 21:24:48", "2024-04-16 08:32:36"])
+                    ->whereBetween('date_fermeture', ["2024-04-15 08:23:32", "2024-04-15 21:24:48"])
                     ->get();
                     //dd($latestClosureDate);
                     // Depense
                     $depenses = DB::table('depenses')
                     ->orderBy('id', 'asc')
-                    ->whereBetween('created_at', ["2024-04-15 21:24:48", "2024-04-16 08:32:36"])
+                    ->whereBetween('created_at', ["2024-04-15 08:23:32", "2024-04-15 21:24:48"])
                     ->get();
                     $results['data'] = $data;
                     $results['depenses'] = $depenses;
                     $results['derniere_date_fermeture'] = "2024-04-15 21:24:48";
-                    $results['current_date'] = "2024-04-16 08:32:36";
+                    $results['current_date'] = "2024-04-15 08:23:32";
                     //dd($results);
-                
             }
         $pdf = PDF::loadView("pdf.situation-pdf",$results);
         return $pdf->stream();
